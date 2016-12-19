@@ -2,7 +2,9 @@ from django.conf import global_settings
 from django.template import Context, Template
 from django.test import TestCase, modify_settings, override_settings
 
-from wagtailsystemtext.utils import gettext, set_site, fill_cache, preload
+from wagtailsystemtext.utils import (
+    gettext, set_site, fill_cache, preload, _cleanup,
+)
 from tests.factories import SiteFactory, PageFactory, SystemStringFactory
 
 @override_settings(
@@ -29,6 +31,9 @@ from tests.factories import SiteFactory, PageFactory, SystemStringFactory
     SITE_ID=1
 )
 class TemplateFiltersTestCase(TestCase):
+    def tearDown(self):
+        _cleanup()
+
     def setUp(self):
         site = SiteFactory.create(
             root_page=PageFactory.create(title='mypage', path='00010002')

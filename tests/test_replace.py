@@ -1,12 +1,14 @@
 from django.test import TestCase
 
-from wagtailsystemtext.utils import gettext, set_site, fill_cache, preload
+from wagtailsystemtext.utils import (
+    gettext, set_site, fill_cache, preload, _cleanup,
+)
 from tests.factories import SiteFactory, PageFactory, SystemStringFactory
 
 
 class ReplaceTestCase(TestCase):
     def tearDown(self):
-        pass
+        _cleanup()
 
     def test_replace(self):
         site = SiteFactory.create(

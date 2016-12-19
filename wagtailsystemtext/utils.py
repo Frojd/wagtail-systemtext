@@ -12,8 +12,9 @@ from wagtailsystemtext.models import SystemString
 _thread_locals = local()
 
 
-# def _cleanup(self):
-    # _thread_locals.site = None
+def _cleanup():
+    del _thread_locals.site
+    del _thread_locals.index
 
 
 def set_site(site):
