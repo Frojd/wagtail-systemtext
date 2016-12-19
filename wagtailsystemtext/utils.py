@@ -21,8 +21,16 @@ def set_site(site):
     _thread_locals.site = site
 
 
+def set_admin_site(site):
+    _thread_locals.admin_site = site
+
+
 def get_site():
     return _thread_locals.site
+
+
+def get_admin_site():
+    return _thread_locals.admin_site
 
 
 def in_cache(site):
@@ -64,7 +72,7 @@ def current_strings():
     values = get_index()
     key = 'site_{}'.format(get_site().pk)
 
-    if not key in values:
+    if key not in values:
         return {}
 
     return values[key]
