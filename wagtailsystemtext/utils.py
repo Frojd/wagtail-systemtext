@@ -67,7 +67,7 @@ def current_strings():
     return values[key]
 
 
-def translate(identifier, group=SystemString.DEFAULT_GROUP):
+def gettext(identifier, group=SystemString.DEFAULT_GROUP):
     strings = current_strings()
     value = identifier
     key = u'{}:{}'.format(group, identifier)

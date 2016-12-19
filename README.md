@@ -40,6 +40,12 @@ MIDDLEWARE_CLASSES = (
 Done!
 
 
+## Roadmap
+
+- [ ] Template tag translations
+- [ ] Lazy translations
+
+
 ## Contributing
 
 Want to contribute? Awesome. Just send a pull request.

@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from wagtailsystemtext.utils import translate, set_site, fill_cache, preload
+from wagtailsystemtext.utils import gettext, set_site, fill_cache, preload
 from tests.factories import SiteFactory, PageFactory, SystemStringFactory
 
 
@@ -20,7 +20,7 @@ class ReplaceTestCase(TestCase):
         fill_cache(site)
         preload(site)
 
-        self.assertEquals(translate('headline'), 'Headline!')
+        self.assertEquals(gettext('headline'), 'Headline!')
 
     def test_group_replace(self):
         site = SiteFactory.create(
@@ -38,7 +38,7 @@ class ReplaceTestCase(TestCase):
         fill_cache(site)
         preload(site)
 
-        self.assertEquals(translate('sub_headline', 'sub'), 'My subheadline')
+        self.assertEquals(gettext('sub_headline', 'sub'), 'My subheadline')
 
     def test_two_sites(self):
         site = SiteFactory.create(
@@ -68,7 +68,7 @@ class ReplaceTestCase(TestCase):
         preload(site_b)
 
         set_site(site)
-        self.assertEquals(translate('headline'), 'headline a')
+        self.assertEquals(gettext('headline'), 'headline a')
 
         set_site(site_b)
-        self.assertEquals(translate('headline'), 'headline b')
+        self.assertEquals(gettext('headline'), 'headline b')
