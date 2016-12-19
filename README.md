@@ -42,10 +42,10 @@ Done!
 ## Roadmap
 
 - [x] `trans" template tag support
-- [ ] Wagtail admin view with site permissions
+- [x] Wagtail admin view with site permissions
+
+- [ ] Cache-rebild on save through admin
 - [ ] Lazy text transforms
-- [ ] Cache-rebild on save
-- [ ] Sync command between sites
 - [ ] Sync command between sites
 - [ ] Last accessed timestamps
 - [ ] `blocktrans" template tag support
