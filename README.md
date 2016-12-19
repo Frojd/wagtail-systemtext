@@ -1,5 +1,8 @@
 # Wagtail System Text
 
+Simplified wagtail system text management
+
+
 ## Requirements
 
 - Python 2.7 / Python 3.5+
@@ -47,7 +50,7 @@ Done!
 from wagtailsystemtext.utils import gettext as _
 
 _('my_text')
-_('main_label', group='buttons)
+_('main_label', 'buttons')
 ```
 
 #### Templatetags
