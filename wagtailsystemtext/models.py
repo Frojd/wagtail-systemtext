@@ -14,7 +14,7 @@ class SystemString(models.Model):
     site = models.ForeignKey(Site)
 
     created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
+    updated = models.DateTimeField(null=True, blank=True)
     accessed = models.DateTimeField(null=True, blank=True)
 
     class Meta:

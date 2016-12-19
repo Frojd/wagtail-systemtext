@@ -23,7 +23,7 @@ class Migration(migrations.Migration):
                 ('string', models.CharField(blank=True, max_length=1024, null=True)),
                 ('group', models.CharField(default='general', max_length=255)),
                 ('created', models.DateTimeField(auto_now_add=True)),
-                ('updated', models.DateTimeField(auto_now=True)),
+                ('updated', models.DateTimeField(null=True, blank=True)),
                 ('accessed', models.DateTimeField(null=True, blank=True)),
                 ('site', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='wagtailcore.Site')),
             ],
