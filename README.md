@@ -42,8 +42,15 @@ Done!
 
 ## Roadmap
 
-- [ ] Template tag translations
-- [ ] Lazy translations
+- [x] `trans" template tag support
+- [ ] Wagtail admin view with site permissions
+- [ ] Lazy text transforms
+- [ ] Cache-rebild on save
+- [ ] Sync command between sites
+- [ ] Sync command between sites
+- [ ] Last accessed timestamps
+- [ ] `blocktrans" template tag support
+- [ ] Automatic tag discovery
 
 
 ## Contributing
