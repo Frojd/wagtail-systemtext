@@ -68,6 +68,7 @@ _('main_label', 'buttons')
 - [x] `trans` template tag support
 - [x] Wagtail admin view with site permissions
 - [x] Cache-rebild on save through admin
+- [ ] Default text support (on declaration)
 - [ ] Sync command between sites
 - [ ] Lazy text transforms
 - [ ] Last accessed timestamps
