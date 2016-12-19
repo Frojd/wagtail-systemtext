@@ -27,7 +27,6 @@ if not settings.configured:
         ],
         MIDDLEWARE_CLASSES=[],
         ROOT_URLCONF='tests.urls',
-        ALT_GENERATOR_MIN_CONFIDENCE=0,
     )
 
     settings.configure(**params)

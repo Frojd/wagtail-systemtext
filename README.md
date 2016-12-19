@@ -30,7 +30,7 @@ INSTALLED_APPS = (
 
 Then add SiteSystemTextMiddleware to your middlewares.
 
-```
+```python
 MIDDLEWARE_CLASSES = (
     # ...
     'wagtailsystemtext.middlewares.SiteSystemTextMiddleware',
