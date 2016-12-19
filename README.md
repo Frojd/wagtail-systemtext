@@ -38,8 +38,8 @@ MIDDLEWARE_CLASSES = (
 
 Done!
 
-## Usage
 
+## Usage
 
 #### Drop in gettext replacement
 
@@ -47,26 +47,28 @@ Done!
 from wagtailsystemtext.utils import gettext as _
 
 _('my_text')
+_('main_label', group='buttons)
 ```
 
 #### Templatetags
 
 ```python
 {% load systemtext %}
+
+{% st_trans "my_text" %}
 {% st_trans "main_label" group "buttons" %}
 ```
 
 
 ## Roadmap
 
-- [x] `trans" template tag support
+- [x] `trans` template tag support
 - [x] Wagtail admin view with site permissions
 - [x] Cache-rebild on save through admin
-
 - [ ] Sync command between sites
 - [ ] Lazy text transforms
 - [ ] Last accessed timestamps
-- [ ] `blocktrans" template tag support
+- [ ] `blocktrans` template tag support
 - [ ] Automatic tag discovery
 
 
