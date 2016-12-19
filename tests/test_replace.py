@@ -5,6 +5,9 @@ from tests.factories import SiteFactory, PageFactory, SystemStringFactory
 
 
 class ReplaceTestCase(TestCase):
+    def tearDown(self):
+        pass
+
     def test_replace(self):
         site = SiteFactory.create(
             root_page=PageFactory.create(title='mypage', path='00010002')

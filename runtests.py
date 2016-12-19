@@ -25,6 +25,7 @@ if not settings.configured:
             'wagtailsystemtext',
             "tests",
         ],
+        SYSTEMTEXT_CACHE_PREFIX='wagtailsystemtext_test',
         MIDDLEWARE_CLASSES=[],
         ROOT_URLCONF='tests.urls',
     )

@@ -5,13 +5,15 @@ except ImportError:
 
 from django.core.cache import cache
 
+from wagtailsystemtext import app_settings
 from wagtailsystemtext.models import SystemString
 
 
-CACHE_PREFIX = 'wagtailsystemtext'
-CACHE_EXPIRY = 60
-
 _thread_locals = local()
+
+
+# def _cleanup(self):
+    # _thread_locals.site = None
 
 
 def set_site(site):
@@ -27,7 +29,7 @@ def in_cache(site):
 
 
 def cache_key(site):
-    return '{}:{}'.format(CACHE_PREFIX, site.pk)
+    return '{}:{}'.format(app_settings.SYSTEMTEXT_CACHE_PREFIX, site.pk)
 
 
 def get_from_cache(site):
@@ -39,7 +41,7 @@ def fill_cache(site):
     strings = {u'{}:{}'.format(x.group, x.identifier): x.string
                for x in string_qs}
 
-    cache.set(cache_key(site), strings, CACHE_EXPIRY)
+    cache.set(cache_key(site), strings, app_settings.SYSTEMTEXT_CACHE_EXPIRY)
 
 
 def preload(site):
