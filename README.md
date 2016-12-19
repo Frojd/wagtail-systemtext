@@ -7,11 +7,6 @@
 - Wagtail 1.7+
 
 
-## Contributing
-
-Want to contribute? Awesome. Just send a pull request.
-
-
 ## Installation
 
 Install the library with pip:
@@ -19,6 +14,35 @@ Install the library with pip:
 ```
 $ pip install wagtailsystemtext
 ```
+
+
+
+## Quick Setup
+
+Make sure wagtail_geo_widget is added to your `INSTALLED_APPS`.
+
+```python
+INSTALLED_APPS = (
+    # ...
+    'wagtailsystemtext',
+)
+```
+
+Then add SiteSystemTextMiddleware to your middlewares.
+
+```
+MIDDLEWARE_CLASSES = (
+    # ...
+    'wagtailsystemtext.middlewares.SiteSystemTextMiddleware',
+)
+```
+
+Done!
+
+
+## Contributing
+
+Want to contribute? Awesome. Just send a pull request.
 
 
 ## License

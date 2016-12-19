@@ -5,7 +5,7 @@ from wagtailsystemtext.utils import (
 )
 
 
-class TranslationMiddleware(MiddlewareMixin):
+class SiteSystemTextMiddleware(MiddlewareMixin):
     def process_request(self, request):
         site = request.site
 
