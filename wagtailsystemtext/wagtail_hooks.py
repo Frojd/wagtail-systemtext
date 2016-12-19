@@ -13,7 +13,7 @@ class SystemStringEditView(EditView):
     def form_valid(self, form):
         redirect = super(SystemStringEditView, self).form_valid(form)
         if app_settings.SYSTEMTEXT_REBUILD_ON_SAVE:
-            fill_cache(self.instance.site)
+            fill_cache(get_admin_site())
         return redirect
 
 
@@ -21,7 +21,7 @@ class SystemStringCreateView(CreateView):
     def form_valid(self, form):
         redirect = super(SystemStringCreateView, self).form_valid(form)
         if app_settings.SYSTEMTEXT_REBUILD_ON_SAVE:
-            fill_cache(self.instance.site)
+            fill_cache(get_admin_site())
         return redirect
 
 
