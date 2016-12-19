@@ -59,9 +59,27 @@ def do_trans(parser, token):
 
     while remaining:
         option = remaining.pop(0)
-
-        if option == 'group':
+        if option in seen:
+            raise TemplateSyntaxError(
+                "The '%s' option was specified more than once." % option,
+            )
+        elif option == 'group':
             value = remaining.pop(0)[1:-1]
             group = value
+        elif option == 'as':
+            try:
+                value = remaining.pop(0)
+            except IndexError:
+                msg = "No argument provided to the '%s' tag for the as option." % bits[0]
+                six.reraise(TemplateSyntaxError, TemplateSyntaxError(msg), sys.exc_info()[2])
+            asvar = value
+        else:
+            raise TemplateSyntaxError(
+                "Unknown argument for '%s' tag: '%s'. The only options "
+                "available are 'noop', 'context' \"xxx\", and 'as VAR'." % (
+                    bits[0], option,
+                )
+            )
+        seen.add(option)
 
     return TranslateNode(message_string, group, asvar, message_context)

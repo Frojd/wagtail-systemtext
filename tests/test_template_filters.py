@@ -78,3 +78,14 @@ class TemplateFiltersTestCase(TestCase):
         }))
 
         self.assertTrue('Sub Headline!' in out)
+
+    def test_trans_variable_as_var(self):
+        out = Template(
+            "{% load systemtext %}"
+            "{% st_trans title_var group \"sub\" as my_var %}"
+            "hello_{{my_var}}"
+        ).render(Context({
+            'title_var': 'subtitle',
+        }))
+
+        self.assertTrue('hello_Sub Headline!' in out)
