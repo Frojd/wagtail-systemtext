@@ -16,7 +16,6 @@ $ pip install wagtailsystemtext
 ```
 
 
-
 ## Quick Setup
 
 Make sure wagtail_geo_widget is added to your `INSTALLED_APPS`.
@@ -60,4 +59,4 @@ Want to contribute? Awesome. Just send a pull request.
 
 ## License
 
-Wagtail-alt-generator is released under the [MIT License](http://www.opensource.org/licenses/MIT).
+Wagtail System Text is released under the [MIT License](http://www.opensource.org/licenses/MIT).
