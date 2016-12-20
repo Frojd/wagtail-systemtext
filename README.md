@@ -51,7 +51,7 @@ from wagtailsystemtext.utils import systemtext as _
 
 _('my_text')
 _('main_label', group='buttons')
-_('main_label', group='buttons', label='My label')
+_('main_label', group='buttons', default='My label')
 ```
 
 #### Templatetags
