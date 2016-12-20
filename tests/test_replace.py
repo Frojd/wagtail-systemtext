@@ -19,6 +19,7 @@ class ReplaceTestCase(TestCase):
             identifier='headline',
             string='Headline!',
             site=site,
+            modified=True,
         )
 
         set_site(site)
@@ -37,6 +38,7 @@ class ReplaceTestCase(TestCase):
             string='My subheadline',
             group='sub',
             site=site,
+            modified=True,
         )
 
         set_site(site)
@@ -58,12 +60,14 @@ class ReplaceTestCase(TestCase):
             identifier='headline',
             string='headline a',
             site=site,
+            modified=True,
         )
 
         SystemStringFactory.create(
             identifier='headline',
             string='headline b',
             site=site_b,
+            modified=True,
         )
 
         fill_cache(site)
@@ -77,3 +81,39 @@ class ReplaceTestCase(TestCase):
 
         set_site(site_b)
         self.assertEquals(gettext('headline'), 'headline b')
+
+    def test_empty_use_default(self):
+        site = SiteFactory.create(
+            root_page=PageFactory.create(title='mypage', path='00010002')
+        )
+
+        SystemStringFactory.create(
+            identifier='title',
+            string='',
+            site=site,
+            modified=False,
+        )
+
+        set_site(site)
+        fill_cache(site)
+        preload(site)
+
+        self.assertEquals(gettext('title', default='Default title'), 'Default title')
+
+    def test_empty_but_modified(self):
+        site = SiteFactory.create(
+            root_page=PageFactory.create(title='mypage', path='00010002')
+        )
+
+        SystemStringFactory.create(
+            identifier='title',
+            string='',
+            site=site,
+            modified=True,
+        )
+
+        set_site(site)
+        fill_cache(site)
+        preload(site)
+
+        self.assertEquals(gettext('title', default='Default title'), '')

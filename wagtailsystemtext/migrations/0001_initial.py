@@ -25,11 +25,12 @@ class Migration(migrations.Migration):
                 ('created', models.DateTimeField(auto_now_add=True)),
                 ('updated', models.DateTimeField(null=True, blank=True)),
                 ('accessed', models.DateTimeField(null=True, blank=True)),
+                ('modified', models.BooleanField(default=False)),
                 ('site', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='wagtailcore.Site')),
             ],
         ),
         migrations.AlterUniqueTogether(
             name='systemstring',
-            unique_together=set([('string', 'site', 'group')]),
+            unique_together=set([('identifier', 'site', 'group')]),
         ),
     ]

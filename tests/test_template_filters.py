@@ -7,6 +7,7 @@ from wagtailsystemtext.utils import (
 )
 from tests.factories import SiteFactory, PageFactory, SystemStringFactory
 
+
 @override_settings(
     MIDDLEWARE_CLASSES=global_settings.MIDDLEWARE_CLASSES,
     TEMPLATES=[{
@@ -43,6 +44,7 @@ class TemplateFiltersTestCase(TestCase):
             identifier='title',
             string='Headline!',
             site=site,
+            modified=True,
         )
 
         SystemStringFactory.create(
@@ -50,6 +52,21 @@ class TemplateFiltersTestCase(TestCase):
             string='Sub Headline!',
             group='sub',
             site=site,
+            modified=True,
+        )
+
+        SystemStringFactory.create(
+            identifier='new_link',
+            string='',
+            site=site,
+            modified=False,
+        )
+
+        SystemStringFactory.create(
+            identifier='empty_link',
+            string='',
+            site=site,
+            modified=True,
         )
 
         set_site(site)
@@ -94,3 +111,21 @@ class TemplateFiltersTestCase(TestCase):
         }))
 
         self.assertTrue('hello_Sub Headline!' in out)
+
+    def test_trans_tag_default(self):
+        out = Template(
+            "{% load systemtext %}"
+            "{% st_trans \"new_link\" default \"Wow!\"%}"
+        ).render(Context({
+        }))
+
+        self.assertTrue('Wow!' in out)
+
+    def test_trans_tag_empty_no_default(self):
+        out = Template(
+            "{% load systemtext %}"
+            "{% st_trans \"empty_link\" default \"Wow!\"%}"
+        ).render(Context({
+        }))
+
+        self.assertTrue('' in out)

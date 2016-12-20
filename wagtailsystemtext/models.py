@@ -17,5 +17,7 @@ class SystemString(models.Model):
     updated = models.DateTimeField(null=True, blank=True)
     accessed = models.DateTimeField(null=True, blank=True)
 
+    modified = models.BooleanField(default=False)
+
     class Meta:
-        unique_together = ['string', 'site', 'group']
+        unique_together = ['identifier', 'site', 'group']

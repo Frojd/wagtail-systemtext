@@ -13,10 +13,11 @@ register = template.Library()
 
 
 class TranslateNode(Node):
-    def __init__(self, filter_expression, group, asvar=None,
+    def __init__(self, filter_expression, group, asvar=None, default=None,
                  message_context=None):
         self.noop = True
         self.asvar = asvar
+        self.default = default
         self.group = group
         self.message_context = message_context
         self.filter_expression = filter_expression
@@ -37,7 +38,7 @@ class TranslateNode(Node):
         # so they are not interpreted as string format flags.
         is_safe = isinstance(value, SafeData)
         value = value.replace('%%', '%')
-        value = gettext(value, group=self.group)
+        value = gettext(value, group=self.group, default=self.default)
         value = mark_safe(value) if is_safe else value
         if self.asvar:
             context[self.asvar] = value
@@ -53,6 +54,7 @@ def do_trans(parser, token):
     remaining = bits[2:]
 
     asvar = None
+    default = None
     message_context = None
     seen = set()
     group = SystemString.DEFAULT_GROUP
@@ -66,6 +68,9 @@ def do_trans(parser, token):
         elif option == 'group':
             value = remaining.pop(0)[1:-1]
             group = value
+        elif option == 'default':
+            value = remaining.pop(0)[1:-1]
+            default = value
         elif option == 'as':
             try:
                 value = remaining.pop(0)
@@ -82,4 +87,4 @@ def do_trans(parser, token):
             )
         seen.add(option)
 
-    return TranslateNode(message_string, group, asvar, message_context)
+    return TranslateNode(message_string, group, asvar, default, message_context)

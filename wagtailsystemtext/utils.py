@@ -47,7 +47,7 @@ def get_from_cache(site):
 
 def fill_cache(site):
     string_qs = SystemString.objects.filter(site=site)
-    strings = {u'{}:{}'.format(x.group, x.identifier): x.string
+    strings = {u'{}:{}'.format(x.group, x.identifier): (x.string, x.modified)
                for x in string_qs}
 
     cache.set(cache_key(site), strings, app_settings.SYSTEMTEXT_CACHE_EXPIRY)
@@ -78,19 +78,24 @@ def current_strings():
     return values[key]
 
 
-def gettext(identifier, group=SystemString.DEFAULT_GROUP):
+def gettext(identifier, group=SystemString.DEFAULT_GROUP, default=None):
     strings = current_strings()
     value = identifier
     key = u'{}:{}'.format(group, identifier)
 
-    if key in strings:
-        return strings[key]
+    if key not in strings:
+        instance = SystemString.objects.get_or_create(
+            identifier=identifier,
+            group=group,
+            site=get_site(),
+            modified=False,
+        )
 
-    # TODO: Add detect new signal
-    instance = SystemString.objects.get_or_create(
-        identifier=identifier,
-        group=group,
-        site=get_site(),
-    )
+        return default if default else value
 
-    return value
+    string, modified = strings[key]
+
+    if not modified:
+        return default if default else string
+
+    return string
