@@ -78,7 +78,7 @@ def current_strings():
     return values[key]
 
 
-def gettext(identifier, group=SystemString.DEFAULT_GROUP, default=None):
+def systemtext(identifier, group=SystemString.DEFAULT_GROUP, default=None):
     strings = current_strings()
     value = identifier
     key = u'{}:{}'.format(group, identifier)

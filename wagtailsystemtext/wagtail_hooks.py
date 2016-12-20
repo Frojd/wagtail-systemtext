@@ -12,6 +12,9 @@ from wagtailsystemtext.models import SystemString
 class SystemStringEditView(EditView):
     def form_valid(self, form):
         redirect = super(SystemStringEditView, self).form_valid(form)
+        self.instance.modified = True
+        self.instance.save()
+
         if app_settings.SYSTEMTEXT_REBUILD_ON_SAVE:
             fill_cache(get_admin_site())
         return redirect

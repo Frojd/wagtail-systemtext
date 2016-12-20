@@ -1,7 +1,7 @@
 from django.test import TestCase
 
 from wagtailsystemtext.utils import (
-    gettext, set_site, fill_cache, preload, _cleanup,
+    systemtext, set_site, fill_cache, preload, _cleanup,
 )
 from tests.factories import SiteFactory, PageFactory, SystemStringFactory
 
@@ -26,7 +26,7 @@ class ReplaceTestCase(TestCase):
         fill_cache(site)
         preload(site)
 
-        self.assertEquals(gettext('headline'), 'Headline!')
+        self.assertEquals(systemtext('headline'), 'Headline!')
 
     def test_group_replace(self):
         site = SiteFactory.create(
@@ -45,7 +45,7 @@ class ReplaceTestCase(TestCase):
         fill_cache(site)
         preload(site)
 
-        self.assertEquals(gettext('sub_headline', 'sub'), 'My subheadline')
+        self.assertEquals(systemtext('sub_headline', 'sub'), 'My subheadline')
 
     def test_two_sites(self):
         site = SiteFactory.create(
@@ -77,10 +77,10 @@ class ReplaceTestCase(TestCase):
         preload(site_b)
 
         set_site(site)
-        self.assertEquals(gettext('headline'), 'headline a')
+        self.assertEquals(systemtext('headline'), 'headline a')
 
         set_site(site_b)
-        self.assertEquals(gettext('headline'), 'headline b')
+        self.assertEquals(systemtext('headline'), 'headline b')
 
     def test_empty_use_default(self):
         site = SiteFactory.create(
@@ -98,7 +98,7 @@ class ReplaceTestCase(TestCase):
         fill_cache(site)
         preload(site)
 
-        self.assertEquals(gettext('title', default='Default title'), 'Default title')
+        self.assertEquals(systemtext('title', default='Default title'), 'Default title')
 
     def test_empty_but_modified(self):
         site = SiteFactory.create(
@@ -116,4 +116,4 @@ class ReplaceTestCase(TestCase):
         fill_cache(site)
         preload(site)
 
-        self.assertEquals(gettext('title', default='Default title'), '')
+        self.assertEquals(systemtext('title', default='Default title'), '')

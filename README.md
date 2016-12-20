@@ -47,10 +47,11 @@ Done!
 #### Drop in gettext replacement
 
 ```python
-from wagtailsystemtext.utils import gettext as _
+from wagtailsystemtext.utils import systemtext as _
 
 _('my_text')
-_('main_label', 'buttons')
+_('main_label', group='buttons')
+_('main_label', group='buttons', label='My label')
 ```
 
 #### Templatetags
@@ -58,8 +59,9 @@ _('main_label', 'buttons')
 ```python
 {% load systemtext %}
 
-{% st_trans "my_text" %}
-{% st_trans "main_label" group "buttons" %}
+{% systemtext "my_text" %}
+{% systemtext "main_label" group "buttons" %}
+{% systemtext "main_label" group "buttons" default "My label" %}
 ```
 
 
@@ -68,12 +70,12 @@ _('main_label', 'buttons')
 - [x] `trans` template tag support
 - [x] Wagtail admin view with site permissions
 - [x] Cache-rebild on save through admin
-- [ ] Default text support (on declaration)
+- [x] Default text support (on declaration)
 - [ ] Sync command between sites
 - [ ] Lazy text transforms
+- [ ] Automatic tag discovery
 - [ ] Last accessed timestamps
 - [ ] `blocktrans` template tag support
-- [ ] Automatic tag discovery
 
 
 ## Contributing

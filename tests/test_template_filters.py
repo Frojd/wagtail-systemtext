@@ -3,7 +3,7 @@ from django.template import Context, Template
 from django.test import TestCase, modify_settings, override_settings
 
 from wagtailsystemtext.utils import (
-    gettext, set_site, fill_cache, preload, _cleanup,
+    set_site, fill_cache, preload, _cleanup,
 )
 from tests.factories import SiteFactory, PageFactory, SystemStringFactory
 
@@ -73,38 +73,38 @@ class TemplateFiltersTestCase(TestCase):
         fill_cache(site)
         preload(site)
 
-    def test_trans_tag(self):
+    def test_systemtext_tag(self):
         out = Template(
             "{% load systemtext %}"
-            "{% st_trans \"title\" %}"
+            "{% systemtext \"title\" %}"
         ).render(Context({
         }))
 
         self.assertTrue('Headline!' in out)
 
-    def test_trans_tag(self):
+    def test_systemtext_tag(self):
         out = Template(
             "{% load systemtext %}"
-            "{% st_trans \"subtitle\" group \"sub\" %}"
+            "{% systemtext \"subtitle\" group \"sub\" %}"
         ).render(Context({
         }))
 
         self.assertTrue('Sub Headline!' in out)
 
-    def test_trans_variable_tag(self):
+    def test_systemtext_variable_tag(self):
         out = Template(
             "{% load systemtext %}"
-            "{% st_trans title_var group \"sub\" %}"
+            "{% systemtext title_var group \"sub\" %}"
         ).render(Context({
             'title_var': 'subtitle',
         }))
 
         self.assertTrue('Sub Headline!' in out)
 
-    def test_trans_variable_as_var(self):
+    def test_systemtext_variable_as_var(self):
         out = Template(
             "{% load systemtext %}"
-            "{% st_trans title_var group \"sub\" as my_var %}"
+            "{% systemtext title_var group \"sub\" as my_var %}"
             "hello_{{my_var}}"
         ).render(Context({
             'title_var': 'subtitle',
@@ -112,19 +112,19 @@ class TemplateFiltersTestCase(TestCase):
 
         self.assertTrue('hello_Sub Headline!' in out)
 
-    def test_trans_tag_default(self):
+    def test_systemtext_tag_default(self):
         out = Template(
             "{% load systemtext %}"
-            "{% st_trans \"new_link\" default \"Wow!\"%}"
+            "{% systemtext \"new_link\" default \"Wow!\"%}"
         ).render(Context({
         }))
 
         self.assertTrue('Wow!' in out)
 
-    def test_trans_tag_empty_no_default(self):
+    def test_systemtext_tag_empty_no_default(self):
         out = Template(
             "{% load systemtext %}"
-            "{% st_trans \"empty_link\" default \"Wow!\"%}"
+            "{% systemtext \"empty_link\" default \"Wow!\"%}"
         ).render(Context({
         }))
 

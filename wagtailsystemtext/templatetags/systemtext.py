@@ -5,7 +5,7 @@ from django.template.base import TOKEN_TEXT, TOKEN_VAR, render_value_in_context
 from django.utils import six, translation
 from django.utils.safestring import SafeData, mark_safe
 
-from wagtailsystemtext.utils import gettext
+from wagtailsystemtext.utils import systemtext
 from wagtailsystemtext.models import SystemString
 
 
@@ -38,7 +38,7 @@ class TranslateNode(Node):
         # so they are not interpreted as string format flags.
         is_safe = isinstance(value, SafeData)
         value = value.replace('%%', '%')
-        value = gettext(value, group=self.group, default=self.default)
+        value = systemtext(value, group=self.group, default=self.default)
         value = mark_safe(value) if is_safe else value
         if self.asvar:
             context[self.asvar] = value
@@ -47,8 +47,8 @@ class TranslateNode(Node):
             return value
 
 
-@register.tag("st_trans")
-def do_trans(parser, token):
+@register.tag("systemtext")
+def do_systemtext(parser, token):
     bits = token.split_contents()
     message_string = parser.compile_filter(bits[1])
     remaining = bits[2:]
