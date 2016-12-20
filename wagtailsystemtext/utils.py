@@ -1,9 +1,12 @@
+import six
+
 try:
     from threading import local
 except ImportError:
     from django.utils._threading_local import local
 
 from django.core.cache import cache
+from django.utils.functional import lazy
 
 from wagtailsystemtext import app_settings
 from wagtailsystemtext.models import SystemString
@@ -99,3 +102,6 @@ def systemtext(identifier, group=SystemString.DEFAULT_GROUP, default=None):
         return default if default else string
 
     return string
+
+
+systemtext_lazy = lazy(systemtext, six.text_type)
