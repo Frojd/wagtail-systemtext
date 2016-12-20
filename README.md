@@ -90,8 +90,9 @@ ln -nfs $PWD/git-hooks/bump-version.sh .git/hooks/post-flow-hotfix-start
 - [x] Wagtail admin view with site permissions
 - [x] Cache-rebild on save through admin
 - [x] Default text support (on declaration)
+- [x] Lazy text transforms
 - [ ] Sync command between sites
-- [ ] Lazy text transforms
+- [ ] Group filter in Wagtail admin
 - [ ] Automatic tag discovery
 - [ ] Last accessed timestamps
 - [ ] `blocktrans` template tag support
