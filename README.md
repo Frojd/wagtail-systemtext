@@ -1,6 +1,6 @@
 # Wagtail System Text
 
-Simplified wagtail system text management
+Simplified Wagtail system text management
 
 
 ## Requirements
@@ -21,7 +21,7 @@ $ pip install wagtailsystemtext
 
 ## Quick Setup
 
-Make sure wagtail_geo_widget is added to your `INSTALLED_APPS`.
+Make sure wagtailsystemtext is added to your `INSTALLED_APPS`.
 
 ```python
 INSTALLED_APPS = (
