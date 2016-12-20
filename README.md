@@ -5,7 +5,7 @@ Simplified Wagtail system text management
 
 ## Requirements
 
-- Python 2.7 / Python 3.5+
+- Python 2.7
 - Django 1.8+
 - Wagtail 1.7+
 
@@ -63,6 +63,25 @@ _('main_label', group='buttons', default='My label')
 {% systemtext "main_label" group "buttons" %}
 {% systemtext "main_label" group "buttons" default "My label" %}
 ```
+
+
+## Settings
+
+- `SYSTEMTEXT_CACHE_PREFIX`: Cache prefix (wagtailsystemtext by default)
+- `SYSTEMTEXT_CACHE_EXPIRY`: Cache expiry in seconds (10 min by default)
+- `SYSTEMTEXT_REBUILD_ON_SAVE`: If cache should be rebuilt on save (True by default)
+
+
+### Release start
+
+These hooks will automatically bump the application version when using `git flow release ...`
+
+```bash
+chmod +x $PWD/git-hooks/bump-version.sh
+ln -nfs $PWD/git-hooks/bump-version.sh .git/hooks/post-flow-release-start
+ln -nfs $PWD/git-hooks/bump-version.sh .git/hooks/post-flow-hotfix-start
+```
+
 
 
 ## Roadmap

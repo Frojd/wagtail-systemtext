@@ -37,11 +37,11 @@ with open('wagtailsystemtext/__init__.py', 'r') as fd:
 setup(
     name="wagtailsystemtext",
     version=version,
-    description=("Simplified wagtail system text management"),  # NOQA
+    description=("Simplified Wagtail system text management"),  # NOQA
     long_description=long_description,
     author="marteinn",
     author_email="martin.sandstrom@frojd.se",
-    url="https://github.com/frojd/wagtailsystemtext",
+    url="https://github.com/frojd/wagtail-systemtext",
     packages=find_packages(exclude=('tests*',)),
     include_package_data=True,
     install_requires=install_requires,
