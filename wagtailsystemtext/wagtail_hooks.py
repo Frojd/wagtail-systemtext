@@ -32,7 +32,7 @@ class SystemStringAdmin(ModelAdmin):
     model = SystemString
     menu_label = 'System Text'
     menu_order = 200
-    list_display = ('identifier', 'string', 'group', 'site')
+    list_display = ('modified', 'identifier', 'string', 'group', 'site')
     search_fields = ('identifier', 'string')
     add_to_settings_menu = True
     create_view_class = SystemStringCreateView
