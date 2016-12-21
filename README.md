@@ -66,7 +66,7 @@ _('main_label', group='buttons', default='My label')
 
 ### Management commands
 
-- `python manage.py find_and_add_systemtext`: Parses your .py and .html files after systemtext implementations and adds them to each site
+- `python manage.py find_and_add_systemtext`: Searches after your .py and .html files after systemtext implementations and adds them to each site.
 
 
 ## Settings
