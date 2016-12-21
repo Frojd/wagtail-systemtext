@@ -21,3 +21,6 @@ class SystemString(models.Model):
 
     class Meta:
         unique_together = ['identifier', 'site', 'group']
+
+    def __unicode__(self):
+        return unicode(identifier)

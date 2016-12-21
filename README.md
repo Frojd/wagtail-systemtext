@@ -64,12 +64,17 @@ _('main_label', group='buttons', default='My label')
 {% systemtext "main_label" group "buttons" default "My label" %}
 ```
 
+### Management commands
+
+- `python manage.py find_and_add_systemtext`: Searches after your .py and .html files after systemtext implementations and adds them to each site.
+
 
 ## Settings
 
-- `SYSTEMTEXT_CACHE_PREFIX`: Cache prefix (wagtailsystemtext by default)
+- `SYSTEMTEXT_CACHE_PREFIX`: Cache prefix (`"wagtailsystemtext"` by default)
 - `SYSTEMTEXT_CACHE_EXPIRY`: Cache expiry in seconds (10 min by default)
-- `SYSTEMTEXT_REBUILD_ON_SAVE`: If cache should be rebuilt on save (True by default)
+- `SYSTEMTEXT_REBUILD_ON_SAVE`: If cache should be rebuilt on save (`True` by default)
+- `SYSTEMTEXT_USE_DEFAULT_ON_EMPTY`: If present, use default value when string is empty (`False` by default)
 
 
 ### Release start
@@ -91,9 +96,10 @@ ln -nfs $PWD/git-hooks/bump-version.sh .git/hooks/post-flow-hotfix-start
 - [x] Cache-rebild on save through admin
 - [x] Default text support (on declaration)
 - [x] Lazy text transforms
+- [x] Add setting for fallbacking to default if string is empty
+- [ ] Automatic tag discovery
 - [ ] Sync command between sites
 - [ ] Group filter in Wagtail admin
-- [ ] Automatic tag discovery
 - [ ] Last accessed timestamps
 - [ ] `blocktrans` template tag support
 
