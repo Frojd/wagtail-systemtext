@@ -1,5 +1,7 @@
-from django.test import TestCase
+from django.test import TestCase, override_settings
+from django.test import TestCase, modify_settings, override_settings
 
+from wagtailsystemtext import app_settings
 from wagtailsystemtext.utils import (
     systemtext, set_site, fill_cache, preload, _cleanup,
 )
@@ -9,6 +11,8 @@ from tests.factories import SiteFactory, PageFactory, SystemStringFactory
 class ReplaceTestCase(TestCase):
     def tearDown(self):
         _cleanup()
+
+        app_settings.SYSTEMTEXT_USE_DEFAULT_ON_EMPTY = True
 
     def test_replace(self):
         site = SiteFactory.create(
@@ -117,3 +121,24 @@ class ReplaceTestCase(TestCase):
         preload(site)
 
         self.assertEquals(systemtext('title', default='Default title'), '')
+
+    def test_empty_but_modified_setting_override(self):
+        app_settings.SYSTEMTEXT_USE_DEFAULT_ON_EMPTY = True
+
+        site = SiteFactory.create(
+            root_page=PageFactory.create(title='mypage', path='00010002')
+        )
+
+        SystemStringFactory.create(
+            identifier='title',
+            string='',
+            site=site,
+            modified=True,
+        )
+
+        set_site(site)
+        fill_cache(site)
+        preload(site)
+
+        self.assertEquals(systemtext('title', default='Default title'), 'Default title')
+        self.assertEquals(systemtext('title'), '')

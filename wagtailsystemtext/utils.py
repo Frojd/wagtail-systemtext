@@ -8,8 +8,8 @@ except ImportError:
 from django.core.cache import cache
 from django.utils.functional import lazy
 
-from wagtailsystemtext import app_settings
 from wagtailsystemtext.models import SystemString
+from wagtailsystemtext import app_settings
 
 
 _thread_locals = local()
@@ -100,6 +100,9 @@ def systemtext(identifier, group=SystemString.DEFAULT_GROUP, default=None):
 
     if not modified:
         return default if default else string
+
+    if not string and default and app_settings.SYSTEMTEXT_USE_DEFAULT_ON_EMPTY:
+        return default
 
     return string
 
