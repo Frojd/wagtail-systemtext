@@ -1,7 +1,10 @@
 from django.utils.deprecation import MiddlewareMixin
 
 from wagtailsystemtext.utils import (
-    in_cache, fill_cache, set_site, preload
+    in_cache,
+    fill_cache,
+    set_site,
+    preload,
 )
 
 
