@@ -1,6 +1,12 @@
 # Wagtail System Text
 
-Simplified Wagtail system text management
+This is alibrary that attempts to simplify the process of updating static text on a Wagtail website. By using identifiers we mark the strings that can be updated by the editor/moderator from the cms.
+
+An template identifier can look like this `{% systemtext "title" %}`. When this identifier are evaluated it will be added to the cms under the section **Settings / System Text** under the name `title`. The entry has a field called `string` that can be updated, this is the text that will be rendered to the website users.
+
+Identifiers can also be grouped, by using the group argument `{% systemtext "title" group "headlines" %}` we can make management easier, identifiers without group will be assigned to the `general` group.
+
+By default identifiers will added in lazy mode, so for instance when a site renders a idenifier it will be added that sites set of identifiers. The are also management commands that both searches through your code base and finds suiteable identifiers (`find_and_add_systemtext`) and manual add/delete commands (`add_systemtext` / `delete_systemtext`).
 
 
 ## Requirements
@@ -44,15 +50,24 @@ Done!
 
 ## Usage
 
-#### Drop in gettext replacement
+#### String replacements
 
 ```python
-from wagtailsystemtext.utils import systemtext as _
+from wagtailsystemtext.utils import systemtext as _st
 
-_('my_text')
-_('main_label', group='buttons')
-_('main_label', group='buttons', default='My label')
+_st('my_text')
+_st('main_label', group='buttons')
+_st('main_label', group='buttons', default='My label')
 ```
+
+#### Lazy string replacements
+
+from wagtailsystemtext.utils import systemtext_lazy as _st
+
+_st('my_text')
+_st('main_label', group='buttons')
+_st('main_label', group='buttons', default='My label')
+
 
 #### Templatetags
 
@@ -66,7 +81,11 @@ _('main_label', group='buttons', default='My label')
 
 ### Management commands
 
-- `python manage.py find_and_add_systemtext`: Searches after your .py and .html files after systemtext implementations and adds them to each site.
+- `find_and_add_systemtext`: Finds the systemtext identifiers in your applications (by looking for `_st` and `{% systemtext ... %}`) and adds them to each wagtail site).
+- `add_systemtext`: Add identifier to site(s)
+- `delete_systemtext`: Remove identifiers from site(s)
+- `sync_systemtext`: Sync identifiers between sites to make sure they contain the same
+- `list_systemtext`: List all active systemtext
 
 
 ## Settings
@@ -86,7 +105,6 @@ chmod +x $PWD/git-hooks/bump-version.sh
 ln -nfs $PWD/git-hooks/bump-version.sh .git/hooks/post-flow-release-start
 ln -nfs $PWD/git-hooks/bump-version.sh .git/hooks/post-flow-hotfix-start
 ```
-
 
 
 ## Roadmap
