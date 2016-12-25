@@ -62,11 +62,13 @@ _st('main_label', group='buttons', default='My label')
 
 #### Lazy string replacements
 
+```python
 from wagtailsystemtext.utils import systemtext_lazy as _st
 
 _st('my_text')
 _st('main_label', group='buttons')
 _st('main_label', group='buttons', default='My label')
+```
 
 
 #### Templatetags
