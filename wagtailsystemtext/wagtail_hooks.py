@@ -40,7 +40,12 @@ class SystemStringAdmin(ModelAdmin):
 
     def get_queryset(self, request):
         qs = super(SystemStringAdmin, self).get_queryset(request)
-        return qs.filter(site=get_admin_site())
+
+        site = get_admin_site()
+        if site:
+            qs = qs.filter(site=site)
+
+        return qs
 
 
 modeladmin_register(SystemStringAdmin)
