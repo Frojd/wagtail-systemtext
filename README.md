@@ -118,7 +118,7 @@ ln -nfs $PWD/git-hooks/bump-version.sh .git/hooks/post-flow-hotfix-start
 - [x] Lazy text transforms
 - [x] Add setting for fallbacking to default if string is empty
 - [x] Automatic tag discovery
-- [ ] Sync command between sites
+- [x] Sync command between sites
 - [ ] Group filter in Wagtail admin
 - [ ] Last accessed timestamps
 - [ ] `blocktrans` template tag support
