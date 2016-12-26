@@ -10,7 +10,7 @@ class Command(BaseCommand):
     """
     def add_arguments(self, parser):
         parser.add_argument('--identifier', required=True)
-        parser.add_argument('--group', default='general')
+        parser.add_argument('--group', default=SystemString.DEFAULT_GROUP)
         parser.add_argument('--site_id', type=int, default=-1)
 
     def handle(self, *args, **options):

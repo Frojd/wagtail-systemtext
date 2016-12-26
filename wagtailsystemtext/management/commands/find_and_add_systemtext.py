@@ -44,7 +44,7 @@ def parse_api(result):
     value = value[:2]
 
     if len(value) == 1:
-        value.append('general')
+        value.append(SystemString.DEFAULT_GROUP)
 
     identifier = value[0]
     group = value[1]
@@ -70,7 +70,7 @@ def parse_tmpl(result):
     identifier = value[0]
     remaining = value[1:]
 
-    group = 'general'
+    group = SystemString.DEFAULT_GROUP
 
     while remaining:
         option = remaining.pop(0)
