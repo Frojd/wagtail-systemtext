@@ -3,8 +3,8 @@ import os
 import logging
 
 from django.core.management.base import BaseCommand
-from django.contrib.auth.models import User
 from wagtail.wagtailcore.models import Site
+
 from wagtailsystemtext.models import SystemString
 
 
@@ -44,7 +44,7 @@ def parse_api(result):
     value = value[:2]
 
     if len(value) == 1:
-        value.append('general')
+        value.append(SystemString.DEFAULT_GROUP)
 
     identifier = value[0]
     group = value[1]
@@ -70,7 +70,7 @@ def parse_tmpl(result):
     identifier = value[0]
     remaining = value[1:]
 
-    group = 'general'
+    group = SystemString.DEFAULT_GROUP
 
     while remaining:
         option = remaining.pop(0)
@@ -99,18 +99,20 @@ def find_strings(path):
 
 
 class Command(BaseCommand):
-    '''
+    """
     Find and add system text to the various websites
-    '''
+    """
     def add_arguments(self, parser):
         parser.add_argument('--path', required=False)
         parser.add_argument('--dryrun', required=False)
         parser.add_argument('--limit', type=int, default=-1)
+        parser.add_argument('--force', type=bool, default=False)
 
     def handle(self, *args, **options):
         path = options['path']
         dryrun = options['dryrun']
         limit = options['limit']
+        force = options['force']
 
         if not path:
             path = os.getcwd()
@@ -125,9 +127,10 @@ class Command(BaseCommand):
 
         self.stdout.write('Found {} strings'.format(len(strings)))
 
-        proceed = raw_input('Proceed adding strings? (y/n): ')
-        if proceed != 'y':
-            return
+        if not force:
+            proceed = raw_input('Proceed adding strings? (y/n): ')
+            if proceed != 'y':
+                return
 
         for string in strings:
             identifier, group = string
@@ -137,11 +140,10 @@ class Command(BaseCommand):
                 continue
 
             for site in sites:
-                instance = SystemString.objects.get_or_create(
+                SystemString.objects.get_or_create(
                     identifier=identifier,
                     group=group,
                     site=site,
                 )
 
         self.stdout.write('Done!')
-

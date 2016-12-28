@@ -1,6 +1,16 @@
+[![Build Status](https://travis-ci.org/Frojd/wagtail-systemtext.svg?branch=master)](https://travis-ci.org/Frojd/wagtail-systemtext)
+
+[![PyPI version](https://badge.fury.io/py/wagtailsystemtext.svg)](https://badge.fury.io/py/wagtailsystemtext)
+
 # Wagtail System Text
 
-Simplified Wagtail system text management
+This is a library that attempts to simplify the process of updating static text on a Wagtail website. By using identifiers we mark the strings that can be updated by the editor/moderator from the cms.
+
+An template identifier can look like this `{% systemtext "title" %}`. When this identifier are evaluated it will be added to the cms under the section **Settings / System Text** under the name `title`. The entry has a field called `string` that can be updated, this is the text that will be rendered to the website users.
+
+Identifiers can also be grouped, by using the group argument `{% systemtext "title" group "headlines" %}` we can make management easier, identifiers without group will be assigned to the `general` group.
+
+By default identifiers will added in lazy mode, so for instance when a site renders a idenifier it will be added to that sites set of identifiers. The are also management commands that both searches through your code base and finds suiteable identifiers (`find_and_add_systemtext`), syncs then betweeen sites (`sync_systemtext`) and manual add/delete commands (`add_systemtext` / `delete_systemtext`).
 
 
 ## Requirements
@@ -44,15 +54,35 @@ Done!
 
 ## Usage
 
-#### Drop in gettext replacement
+The implementation closely resembles the default django translaton way of working with text.
+
+### Strings
+
+This is how you work with regular text, supply identifer and group and retrive the systemtext string.
 
 ```python
-from wagtailsystemtext.utils import systemtext as _
+from wagtailsystemtext.utils import systemtext as _st
 
-_('my_text')
-_('main_label', group='buttons')
-_('main_label', group='buttons', default='My label')
+_st('my_text')
+_st('main_label', group='buttons')
+_st('main_label', group='buttons', default='My label')
 ```
+
+### Lazy strings
+
+Lazy strings are run when called upon, when for instance you want to initialize a systemtext retrival before the middleware has run.
+
+```python
+from wagtailsystemtext.utils import systemtext_lazy as _st
+
+_st('my_text')
+_st('main_label', group='buttons')
+_st('main_label', group='buttons', default='My label')
+```
+
+### Templates
+
+Systemtext contains a templatetag called systemtext, that behaves in the same way as Djangos `{% trans... %}`
 
 #### Templatetags
 
@@ -64,9 +94,14 @@ _('main_label', group='buttons', default='My label')
 {% systemtext "main_label" group "buttons" default "My label" %}
 ```
 
-### Management commands
 
-- `python manage.py find_and_add_systemtext`: Searches after your .py and .html files after systemtext implementations and adds them to each site.
+## Management commands
+
+- `find_and_add_systemtext`: Finds the systemtext identifiers in your applications (by looking for `_st` and `{% systemtext ... %}`) and adds them to each wagtail site).
+- `add_systemtext`: Add identifier to site(s)
+- `delete_systemtext`: Remove identifiers from site(s)
+- `sync_systemtext`: Sync identifiers between sites to make sure they contain the same
+- `list_systemtext`: List all active systemtext
 
 
 ## Settings
@@ -88,7 +123,6 @@ ln -nfs $PWD/git-hooks/bump-version.sh .git/hooks/post-flow-hotfix-start
 ```
 
 
-
 ## Roadmap
 
 - [x] `trans` template tag support
@@ -97,8 +131,8 @@ ln -nfs $PWD/git-hooks/bump-version.sh .git/hooks/post-flow-hotfix-start
 - [x] Default text support (on declaration)
 - [x] Lazy text transforms
 - [x] Add setting for fallbacking to default if string is empty
-- [ ] Automatic tag discovery
-- [ ] Sync command between sites
+- [x] Automatic tag discovery
+- [x] Sync command between sites
 - [ ] Group filter in Wagtail admin
 - [ ] Last accessed timestamps
 - [ ] `blocktrans` template tag support

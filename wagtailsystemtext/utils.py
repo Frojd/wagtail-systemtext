@@ -24,12 +24,12 @@ def set_site(site):
     _thread_locals.site = site
 
 
-def set_admin_site(site):
-    _thread_locals.admin_site = site
-
-
 def get_site():
     return _thread_locals.site
+
+
+def set_admin_site(site):
+    _thread_locals.admin_site = site
 
 
 def get_admin_site():
