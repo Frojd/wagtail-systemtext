@@ -1,3 +1,7 @@
+[![Build Status](https://travis-ci.org/Frojd/wagtail-systemtext.svg?branch=master)](https://travis-ci.org/Frojd/wagtail-systemtext)
+
+[![PyPI version](https://badge.fury.io/py/wagtailsystemtext.svg)](https://badge.fury.io/py/wagtailsystemtext)
+
 # Wagtail System Text
 
 This is a library that attempts to simplify the process of updating static text on a Wagtail website. By using identifiers we mark the strings that can be updated by the editor/moderator from the cms.
