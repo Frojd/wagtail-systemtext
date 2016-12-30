@@ -1,10 +1,8 @@
-[![Build Status](https://travis-ci.org/Frojd/wagtail-systemtext.svg?branch=master)](https://travis-ci.org/Frojd/wagtail-systemtext)
-
-[![PyPI version](https://badge.fury.io/py/wagtailsystemtext.svg)](https://badge.fury.io/py/wagtailsystemtext)
+[![Build Status](https://travis-ci.org/Frojd/wagtail-systemtext.svg?branch=master)](https://travis-ci.org/Frojd/wagtail-systemtext) [![PyPI version](https://badge.fury.io/py/wagtailsystemtext.svg)](https://badge.fury.io/py/wagtailsystemtext)
 
 # Wagtail System Text
 
-This is a library that attempts to simplify the process of updating static text on a Wagtail website. By using identifiers we mark the strings that can be updated by the editor/moderator from the cms.
+This is a library that simplifies the process of updating static text on a Wagtail website. By using identifiers we mark the strings that can be updated by the editor/moderator from the cms.
 
 An template identifier can look like this `{% systemtext "title" %}`. When this identifier are evaluated it will be added to the cms under the section **Settings / System Text** under the name `title`. The entry has a field called `string` that can be updated, this is the text that will be rendered to the website users.
 
@@ -24,7 +22,7 @@ By default identifiers will added in lazy mode, so for instance when a site rend
 
 Install the library with pip:
 
-```
+```bash
 $ pip install wagtailsystemtext
 ```
 
