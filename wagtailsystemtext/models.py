@@ -23,4 +23,4 @@ class SystemString(models.Model):
         unique_together = ['identifier', 'site', 'group']
 
     def __unicode__(self):
-        return unicode(identifier)
+        return unicode(self.identifier)
