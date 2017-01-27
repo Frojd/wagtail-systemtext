@@ -29,11 +29,13 @@ $ pip install wagtailsystemtext
 
 ## Quick Setup
 
-Make sure wagtailsystemtext is added to your `INSTALLED_APPS`.
+Make sure `wagtail.contrib.modeladmin` and `wagtailsystemtext` is added to your `INSTALLED_APPS`.
+
 
 ```python
 INSTALLED_APPS = (
     # ...
+    'wagtail.contrib.modeladmin',
     'wagtailsystemtext',
 )
 ```
