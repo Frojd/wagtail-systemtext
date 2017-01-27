@@ -33,7 +33,7 @@ def set_admin_site(site):
 
 
 def get_admin_site():
-    return _thread_locals.admin_site
+    return getattr(_thread_locals, 'admin_site', None)
 
 
 def in_cache(site):
