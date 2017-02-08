@@ -8,6 +8,22 @@ from django.core.management import execute_from_command_line
 
 if not settings.configured:
     params = dict(
+        LOGGING = {
+            'version': 1,
+            'disable_existing_loggers': False,
+            'handlers': {
+                'console': {
+                    'class': 'logging.StreamHandler',
+                },
+            },
+            'loggers': {
+                'wagtailsystemtext': {
+                    'handlers': ['console'],
+                    'level': 'ERROR',
+                    'propagate': True,
+                },
+            },
+        },
         DATABASES={
             "default": {
                 "ENGINE": "django.db.backends.sqlite3",

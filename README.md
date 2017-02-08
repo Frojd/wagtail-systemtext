@@ -2,9 +2,9 @@
 
 # Wagtail System Text
 
-This is a library that simplifies the process of updating static text on a Wagtail website. By using identifiers we mark the strings that can be updated by the editor/moderator from the cms.
+This is a library that enables cms editors to update static test in Wagtail. By using identifiers developers mark the strings that can be updated by the editor/moderator from the cms.
 
-An template identifier can look like this `{% systemtext "title" %}`. When this identifier are evaluated it will be added to the cms under the section **Settings / System Text** under the name `title`. The entry has a field called `string` that can be updated, this is the text that will be rendered to the website users.
+A template identifier can look like this `{% systemtext "title" %}`. When this identifier are evaluated it will be added to the cms under the section **Settings / System Text** under the name `title`. The entry has a field called `string` that can be updated, this is the text that will be rendered to the website users.
 
 Identifiers can also be grouped, by using the group argument `{% systemtext "title" group "headlines" %}` we can make management easier, identifiers without group will be assigned to the `general` group.
 
@@ -29,20 +29,23 @@ $ pip install wagtailsystemtext
 
 ## Quick Setup
 
-Make sure wagtailsystemtext is added to your `INSTALLED_APPS`.
+Make sure `wagtail.contrib.modeladmin` and `wagtailsystemtext` is added to your `INSTALLED_APPS`.
+
 
 ```python
 INSTALLED_APPS = (
     # ...
+    'wagtail.contrib.modeladmin',
     'wagtailsystemtext',
 )
 ```
 
-Then add SiteSystemTextMiddleware to your middlewares.
+Then add SiteSystemTextMiddleware to your middlewares, make sure you add it after `wagtail.wagtailcore.middleware.SiteMiddleware`
 
 ```python
 MIDDLEWARE_CLASSES = (
     # ...
+    'wagtail.wagtailcore.middleware.SiteMiddleware',
     'wagtailsystemtext.middlewares.SiteSystemTextMiddleware',
 )
 ```
@@ -52,7 +55,7 @@ Done!
 
 ## Usage
 
-The implementation closely resembles the default django translaton way of working with text.
+Overall the implementation follows the same convention of django translations.
 
 ### Strings
 
@@ -68,7 +71,7 @@ _st('main_label', group='buttons', default='My label')
 
 ### Lazy strings
 
-Lazy strings are run when called upon, when for instance you want to initialize a systemtext retrival before the middleware has run.
+Lazy strings are run when called upon, when for instance you want to initialize a systemtext retrival before the middleware has run. Like in a admin interface.
 
 ```python
 from wagtailsystemtext.utils import systemtext_lazy as _st
