@@ -55,8 +55,9 @@ class MiddlewareSitesTestCase(TestCase):
         Site.objects.all().delete()
 
         resp = self.client.get('/test-title')
-        self.assertTrue(resp.content == '')
+        self.assertTrue(not resp.content)
 
     def test_with_site(self):
         resp = self.client.get('/test-title', SERVER_NAME=self.site.hostname)
-        self.assertTrue(resp.content == 'Headline!')
+        content = resp.content.decode('utf-8')
+        self.assertTrue(content == u'Headline!')

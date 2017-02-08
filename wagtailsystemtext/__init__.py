@@ -8,8 +8,8 @@ Simplified Wagtail system text management
 """
 
 __title__ = 'wagtailsystemtext'
-__version__ = '1.2.0'
-__build__ = 120
+__version__ = '1.2.1'
+__build__ = 121
 __author__ = "Martin Sandström"
 __license__ = "MIT"
 __copyright__ = "Copyright 2016 Martin Sandström"
