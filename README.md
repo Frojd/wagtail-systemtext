@@ -40,11 +40,12 @@ INSTALLED_APPS = (
 )
 ```
 
-Then add SiteSystemTextMiddleware to your middlewares.
+Then add SiteSystemTextMiddleware to your middlewares. Make sure you add it after `wagtail.wagtailcore.middleware.SiteMiddleware`
 
 ```python
 MIDDLEWARE_CLASSES = (
     # ...
+    'wagtail.wagtailcore.middleware.SiteMiddleware',
     'wagtailsystemtext.middlewares.SiteSystemTextMiddleware',
 )
 ```
