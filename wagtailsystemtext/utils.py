@@ -16,8 +16,11 @@ _thread_locals = local()
 
 
 def _cleanup():
-    del _thread_locals.site
-    del _thread_locals.index
+    if hasattr(_thread_locals, 'site'):
+        del _thread_locals.site
+
+    if hasattr(_thread_locals, 'index'):
+        del _thread_locals.index
 
 
 def set_site(site):
@@ -25,7 +28,7 @@ def set_site(site):
 
 
 def get_site():
-    return _thread_locals.site
+    return getattr(_thread_locals, 'site', None)
 
 
 def set_admin_site(site):
@@ -73,7 +76,8 @@ def get_index():
 
 def current_strings():
     values = get_index()
-    key = 'site_{}'.format(get_site().pk)
+    site = get_site()
+    key = 'site_{}'.format(site.pk)
 
     if key not in values:
         return {}
@@ -82,6 +86,11 @@ def current_strings():
 
 
 def systemtext(identifier, group=SystemString.DEFAULT_GROUP, default=None):
+    site = get_site()
+
+    if not site:
+        return default if default else ''
+
     strings = current_strings()
     value = identifier
     key = u'{}:{}'.format(group, identifier)
@@ -90,7 +99,7 @@ def systemtext(identifier, group=SystemString.DEFAULT_GROUP, default=None):
         instance = SystemString.objects.get_or_create(
             identifier=identifier,
             group=group,
-            site=get_site(),
+            site=site,
             modified=False,
         )
 
