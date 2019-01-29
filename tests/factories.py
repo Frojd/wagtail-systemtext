@@ -1,7 +1,7 @@
 from __future__ import absolute_import, unicode_literals
 
 import factory
-from wagtail.wagtailcore.models import Site, Page
+from wagtail.core.models import Site, Page
 
 from wagtailsystemtext.models import SystemString
 
@@ -10,7 +10,7 @@ class PageFactory(factory.DjangoModelFactory):
     class Meta:
         model = Page
 
-    path = factory.Sequence(lambda x: '00010001{:04d}'.format(x+1))
+    path = factory.Sequence(lambda x: '00010001{:04d}'.format(x + 1))
     depth = 3
     numchild = 0
     live = True

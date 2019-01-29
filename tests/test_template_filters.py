@@ -9,7 +9,7 @@ from tests.factories import SiteFactory, PageFactory, SystemStringFactory
 
 
 @override_settings(
-    MIDDLEWARE_CLASSES=global_settings.MIDDLEWARE_CLASSES,
+    MIDDLEWARE=global_settings.MIDDLEWARE,
     TEMPLATES=[{
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [

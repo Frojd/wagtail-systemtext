@@ -3,7 +3,7 @@ import os
 import logging
 
 from django.core.management.base import BaseCommand
-from wagtail.wagtailcore.models import Site
+from wagtail.core.models import Site
 
 from wagtailsystemtext.models import SystemString
 

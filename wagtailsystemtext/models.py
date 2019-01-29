@@ -1,7 +1,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
-from wagtail.wagtailcore.models import Site
+from wagtail.core.models import Site
 
 
 class SystemString(models.Model):
@@ -11,7 +11,7 @@ class SystemString(models.Model):
     string = models.CharField(max_length=1024, blank=True, null=True)
     group = models.CharField(max_length=255, default=DEFAULT_GROUP)
 
-    site = models.ForeignKey(Site)
+    site = models.ForeignKey(Site, on_delete=models.CASCADE)
 
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(null=True, blank=True)

@@ -1,8 +1,7 @@
 from django import template
-from django.conf import settings
-from django.template import Library, Node, TemplateSyntaxError, Variable
-from django.template.base import TOKEN_TEXT, TOKEN_VAR, render_value_in_context
-from django.utils import six, translation
+from django.template import Node, TemplateSyntaxError, Variable
+from django.template.base import render_value_in_context
+from django.utils import six
 from django.utils.safestring import SafeData, mark_safe
 
 from wagtailsystemtext.utils import systemtext
