@@ -13,9 +13,9 @@ By default identifiers will added in lazy mode, so for instance when a site rend
 
 ## Requirements
 
-- Python 2.7
-- Django 1.8+
-- Wagtail 1.7+
+- Python 3
+- Django 2+
+- Wagtail 2+
 
 
 ## Installation
@@ -40,12 +40,12 @@ INSTALLED_APPS = (
 )
 ```
 
-Then add SiteSystemTextMiddleware to your middlewares, make sure you add it after `wagtail.wagtailcore.middleware.SiteMiddleware`
+Then add SiteSystemTextMiddleware to your middlewares, make sure you add it after `wagtail.wagtail.core.middleware.SiteMiddleware`
 
 ```python
 MIDDLEWARE_CLASSES = (
     # ...
-    'wagtail.wagtailcore.middleware.SiteMiddleware',
+    'wagtail.wagtail.core.middleware.SiteMiddleware',
     'wagtailsystemtext.middlewares.SiteSystemTextMiddleware',
 )
 ```
