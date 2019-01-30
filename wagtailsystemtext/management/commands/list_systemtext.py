@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand
-from wagtail.wagtailcore.models import Site
-
 from wagtailsystemtext.models import SystemString
+
+from wagtail.core.models import Site
 
 
 class Command(BaseCommand):

@@ -8,7 +8,7 @@ from django.core.management import execute_from_command_line
 
 if not settings.configured:
     params = dict(
-        LOGGING = {
+        LOGGING={
             'version': 1,
             'disable_existing_loggers': False,
             'handlers': {
@@ -33,16 +33,16 @@ if not settings.configured:
             'django.contrib.contenttypes',
             'django.contrib.auth',
             'django.contrib.sites',
-            'wagtail.wagtailcore',
-            'wagtail.wagtailsites',
-            'wagtail.wagtailusers',
-            'wagtail.wagtailimages',
+            'wagtail.core',
+            'wagtail.sites',
+            'wagtail.users',
+            'wagtail.images',
             'taggit',
             'wagtailsystemtext',
             "tests",
         ],
         SYSTEMTEXT_CACHE_PREFIX='wagtailsystemtext_test',
-        MIDDLEWARE_CLASSES=[],
+        MIDDLEWARE=[],
         ROOT_URLCONF='tests.urls',
     )
 

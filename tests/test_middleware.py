@@ -1,17 +1,18 @@
 from django.conf import global_settings
 from django.test import TestCase, override_settings
+from wagtail.core.models import Site
 
-from wagtail.wagtailcore.models import Site
 from wagtailsystemtext.utils import _cleanup
-
 from tests.factories import SiteFactory, PageFactory, SystemStringFactory
 
 
+
 @override_settings(
-    MIDDLEWARE_CLASSES=global_settings.MIDDLEWARE_CLASSES+[
-        'wagtail.wagtailcore.middleware.SiteMiddleware',
+    MIDDLEWARE=global_settings.MIDDLEWARE + [
+        'wagtail.core.middleware.SiteMiddleware',
         'wagtailsystemtext.middlewares.SiteSystemTextMiddleware',
     ],
+    ALLOWED_HOSTS=['*'],
     TEMPLATES=[{
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
